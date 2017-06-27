@@ -3,7 +3,7 @@
 # Made by Nathan Robinson
 # @nrobinson2000
 # File: particle-cli.completion
-# Desc: Bash competion for particle-cli
+# Desc: Bash completion for particle-cli
 
 _particle()
 {
