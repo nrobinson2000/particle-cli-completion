@@ -14,9 +14,9 @@ _particle()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
 
-    _primary="setup list call get device identify flash subscribe compile monitor
-    login logout help library token binary cloud config function keys serial udp
-    update variable webhook wireless"
+    _primary="setup list call get device identify flash subscribe compile
+    monitor login logout help library token binary cloud config function keys
+    serial udp update variable webhook wireless"
 
     _binary="inspect"
     _cloud="claim list remove name flash compile nyan login logout"
