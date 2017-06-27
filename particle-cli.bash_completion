@@ -17,7 +17,7 @@ _particle()
     library="create copy migrate search upload publish add"
 
 
-  if [[ ${prev} == "$script" ]]; then
+  if [[ ${prev} == "particle" ]]; then
       COMPREPLY=( $(compgen -W "${primary}" -- ${cur}) )
       return 0
 
