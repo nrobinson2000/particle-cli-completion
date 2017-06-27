@@ -3,7 +3,7 @@
 ## Load the completion:
 
 ```bash
-$ source particle-cli.bash_completion
+$ source particle-cli.completion
 ```
 
 **Now try tabbing while using `particle`!**
