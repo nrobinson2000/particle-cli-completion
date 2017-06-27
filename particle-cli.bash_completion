@@ -3,7 +3,7 @@
 
 _particle()
 {
-    local cur prev preprev prepreprev primary device platforms library examples
+    local cur prev preprev prepreprev primary library
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
