@@ -2,8 +2,8 @@ dist: xenial
 language: bash
 addons:
   apt:
-    sources:
-    - debian-sid    # Grab ShellCheck from the Debian repo
+    # sources:
+    # - debian-sid    # Grab ShellCheck from the Debian repo
     packages:
     - shellcheck
 script:
