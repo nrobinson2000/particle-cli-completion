@@ -69,6 +69,8 @@ _particle()
         COMPREPLY=($(compgen -W "$_webhook" -- "$cur"));;
       wireless)
         COMPREPLY=($(compgen -W "$_wireless" -- "$cur"));;
+      *)
+        COMPREPLY=($(compgen -fd -- "$cur"));;
     esac
 }
 
