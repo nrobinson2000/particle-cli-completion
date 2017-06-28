@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nrobinson2000/particle-cli-completion.svg?branch=master)](https://travis-ci.org/nrobinson2000/particle-cli-completion)
 # particle-cli-completion
 *Created because of [this request.](https://github.com/spark/particle-cli/issues/369)*
 
