@@ -78,8 +78,8 @@ _particle() # This is the bash completion funtion
       wireless)
         COMPREPLY=($(compgen -W "$_wireless" -- "$cur"));;
       *)
-        COMPREPLY=($(compgen -fd -- "$cur"));;
         # Suggest files and directories if there is not a match
+        COMPREPLY=($(compgen -fd -- "$cur"));;
     esac
 }
 
