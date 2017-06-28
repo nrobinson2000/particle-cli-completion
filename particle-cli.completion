@@ -5,19 +5,20 @@
 # File: particle-cli.completion
 # Desc: Bash completion for particle-cli
 
-_particle()
+_particle() # This is the bash completion funtion
 {
+    # Variables defined with local are kept in the function
     local cur prev _primary _binary _cloud _config _device _flash _function \
     _keys _library _serial _subscribe _token _udp _variable _webhook _wireless
 
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    COMPREPLY=()                       # Completion suggestions array
+    cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
+    prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
 
+    # These strings contain subcommands and arguments
     _primary="setup list call get device identify flash subscribe compile
     monitor login logout help library token binary cloud config function keys
-    serial udp update variable webhook wireless"
-
+    serial udp update variable webhook wireless" # Multiple lines are OK
     _binary="inspect"
     _cloud="claim list remove name flash compile nyan login logout"
     _config="local particle useSudoForDfu list identify"
@@ -34,16 +35,20 @@ _particle()
     _webhook="create list delete POST GET"
     _wireless="list monitor"
 
+    # Suggest primary subcommands when typing the first word after 'particle'
     if [[ "$COMP_CWORD" == 1 ]]; then
       COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
       return 0
     fi
 
+    # Suggest corresponding subcommands and arguments for each command
     case "$prev" in
       help)
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
+        # Suggest primary subcommands again
       binary)
         COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
+        # Suggest secondary subcommand(s)
       cloud)
         COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
       device)
@@ -74,6 +79,7 @@ _particle()
         COMPREPLY=($(compgen -W "$_wireless" -- "$cur"));;
       *)
         COMPREPLY=($(compgen -fd -- "$cur"));;
+        # Suggest files and directories if there is not a match
     esac
 }
 
