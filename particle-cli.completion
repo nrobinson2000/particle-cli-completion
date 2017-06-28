@@ -83,4 +83,4 @@ _particle() # This is the bash completion funtion
     esac
 }
 
-complete -F _particle particle
+complete -F _particle particle # Apply the _particle completion function
