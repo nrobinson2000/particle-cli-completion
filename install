@@ -14,11 +14,11 @@ echo
 
 case "$(uname -s)" in
   Linux)
-    sudo curl -fsSLo "/etc/bash_completion.d/particle-cli.completion" "$COMPLETION_URL"
+    sudo curl -sLo "/etc/bash_completion.d/particle-cli.completion" "$COMPLETION_URL"
     echo "Installed in /etc/bash_completion.d";;
   *)
     mkdir -p "$HOME/.bash_completion"
-    curl -fsSLo "$HOME/.bash_completion/particle-cli.completion" "$COMPLETION_URL"
+    curl -sLo "$HOME/.bash_completion/particle-cli.completion" "$COMPLETION_URL"
     echo "source $HOME/.bash_completion/particle-cli.completion" >> "$HOME/.profile"
     echo "Installed in ~/.bash_completion, sourced in ~/.profile";;
 esac
