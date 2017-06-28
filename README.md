@@ -9,6 +9,6 @@ $ source particle-cli.completion
 
 **Now try tabbing while using `particle`!**
 
-*Hint: Add the script to a convenient location on your computer and `source` it
+*Hint: Save the script in a convenient location on your computer and `source` it
 in your `.bashrc` or preferred file to make the `particle` completions available
 every time you open a terminal.*
