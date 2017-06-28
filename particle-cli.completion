@@ -57,7 +57,7 @@ _particle() # This is the bash completion funtion
       function)
         COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
       help)
-        # Help command - Suggest primary subcommands again
+        # Suggest primary subcommands again
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       keys)
         COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
