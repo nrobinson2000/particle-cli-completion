@@ -34,7 +34,7 @@ _particle()
     _webhook="create list delete POST GET"
     _wireless="list monitor"
 
-    if [[ "${COMP_CWORD}" == 1 ]]; then
+    if [[ "$COMP_CWORD" == 1 ]]; then
       COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
       return 0
     fi
