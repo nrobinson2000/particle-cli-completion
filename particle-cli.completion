@@ -20,8 +20,8 @@ _particle()
 
     _binary="inspect"
     _cloud="claim list remove name flash compile nyan login logout"
-    _device="add remove rename"
     _config="local particle useSudoForDfu list identify"
+    _device="add remove rename"
     _flash="--usb --serial"
     _function="list call"
     _keys="new load save send doctor server address protocol"
@@ -34,74 +34,42 @@ _particle()
     _webhook="create list delete POST GET"
     _wireless="list monitor"
 
-  if [[ ${prev} == "particle" ]]; then
-      COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) )
-      return 0
-
-    elif [[ ${prev} == "help" ]]; then
-      COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) )
-      return 0
-
-   elif [[ ${prev} == "library" ]]; then
-     COMPREPLY=( $(compgen -W "${_library}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "binary" ]]; then
-     COMPREPLY=( $(compgen -W "${_binary}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "cloud" ]]; then
-     COMPREPLY=( $(compgen -W "${_cloud}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "config" ]]; then
-     COMPREPLY=( $(compgen -W "${_config}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "flash" ]]; then
-     COMPREPLY=( $(compgen -W "${_flash}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "function" ]]; then
-     COMPREPLY=( $(compgen -W "${_function}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "keys" ]]; then
-     COMPREPLY=( $(compgen -W "${_keys}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "library" ]]; then
-     COMPREPLY=( $(compgen -W "${_library}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "serial" ]]; then
-     COMPREPLY=( $(compgen -W "${_serial}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "subscribe" ]]; then
-     COMPREPLY=( $(compgen -W "${_subscribe}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "token" ]]; then
-     COMPREPLY=( $(compgen -W "${_token}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "udp" ]]; then
-     COMPREPLY=( $(compgen -W "${_udp}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "variable" ]]; then
-     COMPREPLY=( $(compgen -W "${_variable}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "webhook" ]]; then
-     COMPREPLY=( $(compgen -W "${_webhook}" -- ${cur}) )
-     return 0
-
-   elif [[ ${prev} == "wireless" ]]; then
-     COMPREPLY=( $(compgen -W "${_wireless}" -- ${cur}) )
-     return 0
-    fi
+    case ${prev} in
+      particle)
+      COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) );;
+      help)
+        COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) );;
+      binary)
+        COMPREPLY=( $(compgen -W "${_binary}" -- ${cur}) );;
+      cloud)
+        COMPREPLY=( $(compgen -W "${_cloud}" -- ${cur}) );;
+      device)
+        COMPREPLY=( $(compgen -W "${_device}" -- ${cur}) );;
+      config)
+        COMPREPLY=( $(compgen -W "${_config}" -- ${cur}) );;
+      flash)
+        COMPREPLY=( $(compgen -W "${_flash}" -- ${cur}) );;
+      function)
+        COMPREPLY=( $(compgen -W "${_function}" -- ${cur}) );;
+      keys)
+        COMPREPLY=( $(compgen -W "${_keys}" -- ${cur}) );;
+      library)
+        COMPREPLY=( $(compgen -W "${_library}" -- ${cur}) );;
+      serial)
+        COMPREPLY=( $(compgen -W "${_serial}" -- ${cur}) );;
+      subscribe)
+        COMPREPLY=( $(compgen -W "${_subscribe}" -- ${cur}) );;
+      token)
+        COMPREPLY=( $(compgen -W "${_token}" -- ${cur}) );;
+      udp)
+        COMPREPLY=( $(compgen -W "${_udp}" -- ${cur}) );;
+      variable)
+        COMPREPLY=( $(compgen -W "${_variable}" -- ${cur}) );;
+      webhook)
+        COMPREPLY=( $(compgen -W "${_webhook}" -- ${cur}) );;
+      wireless)
+        COMPREPLY=( $(compgen -W "${_wireless}" -- ${cur}) );;
+    esac
 }
 
 complete -F _particle particle
