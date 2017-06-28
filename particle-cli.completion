@@ -44,8 +44,8 @@ _particle() # This is the bash completion funtion
     # Suggest corresponding subcommands and arguments for each command
     case "$prev" in
       binary)
-        COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
         # Suggest secondary subcommand(s)
+        COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
       cloud)
         COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
       config)
@@ -57,8 +57,8 @@ _particle() # This is the bash completion funtion
       function)
         COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
       help)
-        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
         # Help command - Suggest primary subcommands again
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       keys)
         COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
       library)
