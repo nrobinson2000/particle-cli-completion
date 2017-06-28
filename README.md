@@ -17,7 +17,7 @@ $ source particle-cli.completion
 
 ## Automatic Install:
 
-You can install the compeletion using the [install script](https://github.com/nrobinson2000/particle-cli-completion/blob/master/install):
+You can install the completion using the [install script](https://github.com/nrobinson2000/particle-cli-completion/blob/master/install):
 
 ```bash
 $ bash <(curl -sL https://git.io/vQWZD)
