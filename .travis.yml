@@ -8,3 +8,4 @@ addons:
     - shellcheck
 script:
   - shellcheck particle-cli.completion
+  - shellcheck install
