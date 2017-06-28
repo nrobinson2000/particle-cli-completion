@@ -34,9 +34,12 @@ _particle()
     _webhook="create list delete POST GET"
     _wireless="list monitor"
 
+    if [[ "${COMP_CWORD}" == 1 ]]; then
+      COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+      return 0
+    fi
+
     case "$prev" in
-      particle)
-        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       help)
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       binary)
