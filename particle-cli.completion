@@ -43,22 +43,22 @@ _particle() # This is the bash completion funtion
 
     # Suggest corresponding subcommands and arguments for each command
     case "$prev" in
-      help)
-        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
-        # Suggest primary subcommands again
       binary)
         COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
         # Suggest secondary subcommand(s)
       cloud)
         COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
-      device)
-        COMPREPLY=($(compgen -W "$_device" -- "$cur"));;
       config)
         COMPREPLY=($(compgen -W "$_config" -- "$cur"));;
+      device)
+        COMPREPLY=($(compgen -W "$_device" -- "$cur"));;
       flash)
         COMPREPLY=($(compgen -W "$_flash" -- "$cur"));;
       function)
         COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
+      help)
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
+        # Help Command: Suggest primary subcommands again
       keys)
         COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
       library)
