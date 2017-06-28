@@ -15,6 +15,10 @@ $ source particle-cli.completion
 
 **Now try tabbing while using `particle`!**
 
-*Hint: Save the script in a convenient location on your computer and `source` it
-in your `.bashrc` or preferred file to make the `particle` completions available
-every time you open a terminal.*
+## Automatic Install:
+
+You can install the compeletion using the [install script](https://github.com/nrobinson2000/particle-cli-completion/blob/master/install):
+
+```bash
+$ bash <(curl -sL https://git.io/vQWZD)
+```
