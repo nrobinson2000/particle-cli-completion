@@ -7,7 +7,7 @@
 
 _particle()
 {
-    local cur prev _primary _binary _cloud _device _config _flash _function \
+    local cur prev _primary _binary _cloud _config _device _flash _function \
     _keys _library _serial _subscribe _token _udp _variable _webhook _wireless
 
     COMPREPLY=()
@@ -34,41 +34,41 @@ _particle()
     _webhook="create list delete POST GET"
     _wireless="list monitor"
 
-    case ${prev} in
+    case "$prev" in
       particle)
-      COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) );;
+      COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       help)
-        COMPREPLY=( $(compgen -W "${_primary}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       binary)
-        COMPREPLY=( $(compgen -W "${_binary}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
       cloud)
-        COMPREPLY=( $(compgen -W "${_cloud}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
       device)
-        COMPREPLY=( $(compgen -W "${_device}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_device" -- "$cur"));;
       config)
-        COMPREPLY=( $(compgen -W "${_config}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_config" -- "$cur"));;
       flash)
-        COMPREPLY=( $(compgen -W "${_flash}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_flash" -- "$cur"));;
       function)
-        COMPREPLY=( $(compgen -W "${_function}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
       keys)
-        COMPREPLY=( $(compgen -W "${_keys}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
       library)
-        COMPREPLY=( $(compgen -W "${_library}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_library" -- "$cur"));;
       serial)
-        COMPREPLY=( $(compgen -W "${_serial}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_serial" -- "$cur"));;
       subscribe)
-        COMPREPLY=( $(compgen -W "${_subscribe}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_subscribe" -- "$cur"));;
       token)
-        COMPREPLY=( $(compgen -W "${_token}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_token" -- "$cur"));;
       udp)
-        COMPREPLY=( $(compgen -W "${_udp}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_udp" -- "$cur"));;
       variable)
-        COMPREPLY=( $(compgen -W "${_variable}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_variable" -- "$cur"));;
       webhook)
-        COMPREPLY=( $(compgen -W "${_webhook}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_webhook" -- "$cur"));;
       wireless)
-        COMPREPLY=( $(compgen -W "${_wireless}" -- ${cur}) );;
+        COMPREPLY=($(compgen -W "$_wireless" -- "$cur"));;
     esac
 }
 
