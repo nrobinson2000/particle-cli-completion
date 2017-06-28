@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# ------------------------------------- #
+# particle-cli-completion               #
+# Made by Nathan Robinson               #
+# @nrobinson2000                        #
+# File: install                         #
+# Desc: Install particle-cli-completion #
+# ------------------------------------- #
+
+COMPLETION_URL="https://raw.githubusercontent.com/nrobinson2000/particle-cli-completion/master/particle-cli.completion"
+
+echo
+
+case "$(uname -s)" in
+  Linux)
+    sudo curl -fsSLo "/etc/bash_completion.d/particle-cli.completion" "$COMPLETION_URL"
+    echo "Installed in /etc/bash_completion.d";;
+  Darwin)
+    mkdir -p "$HOME/.bash_completion"
+    curl -fsSLo "$HOME/.bash_completion/particle-cli.completion" "$COMPLETION_URL"
+    echo "source $HOME/.bash_completion/particle-cli.completion" >> "$HOME/.profile"
+    echo "Installed in ~/.bash_completion, sourced in ~/.profile";;
+esac
+
+echo "Installed particle-cli-completion. Please open a new terminal"
