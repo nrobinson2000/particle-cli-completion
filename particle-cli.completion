@@ -1,11 +1,12 @@
-#!/bin/bash
-# particle-cli-completion
-# Made by Nathan Robinson
-# @nrobinson2000
-# File: particle-cli.completion
-# Desc: Bash completion for particle-cli
+# ------------------------------------- #
+# particle-cli-completion               #
+# Made by Nathan Robinson               #
+# @nrobinson2000                        #
+# File: particle-cli.completion         #
+# Desc: Tab completion for particle-cli #
+# ------------------------------------- #
 
-_particle() # This is the bash completion funtion
+_particle() # This is the bash completion function
 {
     # Variables defined with local are kept within the function
     local cur prev _primary _binary _cloud _config _device _flash _function \
