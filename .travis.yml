@@ -9,3 +9,4 @@ addons:
 script:
   - shellcheck particle-cli.completion
   - shellcheck install
+  - ./install
