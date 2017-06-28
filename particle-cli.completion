@@ -36,7 +36,7 @@ _particle()
 
     case "$prev" in
       particle)
-      COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       help)
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
       binary)
