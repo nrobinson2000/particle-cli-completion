@@ -2,6 +2,9 @@
 # particle-cli-completion
 *Created because of [this request.](https://github.com/spark/particle-cli/issues/369)*
 
+<p align="center">
+<img src="demo.gif" >
+</p>
 
 ## Load the completion:
 
