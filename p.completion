@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# ------------------------------------- #
+# particle-cli-completion               #
+# Made by Nathan Robinson               #
+# @nrobinson2000                        #
+# File: particle-cli.completion         #
+# Desc: Tab completion for particle-cli #
+# ------------------------------------- #
+
+_particle() # This is the bash completion function
+{
+    # Variables defined with local are kept within the function
+    local cur prev _primary _binary _cloud _config _device _flash _function \
+    _keys _library _serial _subscribe _token _udp _variable _webhook _wireless
+
+    COMPREPLY=()                       # Completion suggestions array
+    cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
+    prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
+
+    # These strings contain subcommands and arguments
+    _primary="setup list call get device identify flash subscribe compile
+    monitor login logout help library token binary cloud config function keys
+    serial udp update variable webhook wireless" # Multiple lines are OK
+    _binary="inspect"
+    _cloud="claim list remove name flash compile nyan login logout"
+    _config="local particle useSudoForDfu list identify"
+    _device="add remove rename"
+    _flash="--usb --serial"
+    _function="list call"
+    _keys="new load save send doctor server address protocol"
+    _library="create copy migrate search upload publish add"
+    _serial="list monitor identify wifi mac inspect flash claim"
+    _subscribe="mine"
+    _token="list revoke new"
+    _udp="send listen"
+    _variable="list get monitor"
+    _webhook="create list delete POST GET"
+    _wireless="list monitor"
+
+    # Suggest primary subcommands when typing the first word after 'particle'
+    if [[ "$COMP_CWORD" == 1 ]]; then
+      COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+      return 0
+    fi
+
+    # Suggest corresponding subcommands and arguments for each command
+    case "$prev" in
+      binary)
+        # Suggest secondary subcommand(s)
+        COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
+      cloud)
+        COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
+      config)
+        COMPREPLY=($(compgen -W "$_config" -- "$cur"));;
+      device)
+        COMPREPLY=($(compgen -W "$_device" -- "$cur"));;
+      flash)
+        COMPREPLY=($(compgen -W "$_flash" -- "$cur"));;
+      function)
+        COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
+      help)
+        # Suggest primary subcommands again
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"));;
+      keys)
+        COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
+      library)
+        COMPREPLY=($(compgen -W "$_library" -- "$cur"));;
+      serial)
+        COMPREPLY=($(compgen -W "$_serial" -- "$cur"));;
+      subscribe)
+        COMPREPLY=($(compgen -W "$_subscribe" -- "$cur"));;
+      token)
+        COMPREPLY=($(compgen -W "$_token" -- "$cur"));;
+      udp)
+        COMPREPLY=($(compgen -W "$_udp" -- "$cur"));;
+      variable)
+        COMPREPLY=($(compgen -W "$_variable" -- "$cur"));;
+      webhook)
+        COMPREPLY=($(compgen -W "$_webhook" -- "$cur"));;
+      wireless)
+        COMPREPLY=($(compgen -W "$_wireless" -- "$cur"));;
+      *)
+        # Suggest files and directories if there is not a match
+        COMPREPLY=($(compgen -fd -- "$cur"));;
+    esac
+}
+
+complete -F _particle p # Apply the _particle completion function
