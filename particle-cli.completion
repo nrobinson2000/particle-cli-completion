@@ -8,6 +8,15 @@
 # Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
+getModems()
+{
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    ls /dev/cu.usbmodem* 2>/dev/null
+  else
+    ls /dev/ttyACM* 2>/dev/null
+  fi
+}
+
 _particle() # This is the bash completion function
 {
     # Variables defined with local are kept within the function
@@ -41,6 +50,16 @@ _particle() # This is the bash completion function
     # Suggest primary subcommands when typing the first word after 'particle'
     if [[ "$COMP_CWORD" == 1 ]]; then
       COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+      return 0
+    fi
+
+    if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
+      return 0
+    fi
+
+    if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "--follow" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
       return 0
     fi
 
