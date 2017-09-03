@@ -105,6 +105,4 @@ _particle() # This is the bash completion function
     esac
 }
 
-complete -F _particle particle # Apply the _particle completion function
-complete -F _particle p
-alias p="particle"
+complete -F _particle p # Apply the _particle completion function
