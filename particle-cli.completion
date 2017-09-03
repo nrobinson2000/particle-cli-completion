@@ -87,3 +87,5 @@ _particle() # This is the bash completion function
 }
 
 complete -F _particle particle # Apply the _particle completion function
+complete -F _particle p
+alias p="particle"
