@@ -30,7 +30,7 @@ _particle() # This is the bash completion function
     # These strings contain subcommands and arguments
     _primary="setup list call get device identify flash subscribe compile
     monitor login logout help library token binary cloud config function keys
-    serial udp update variable webhook wireless" # Multiple lines are OK
+    serial udp update variable webhook wireless project" # Multiple lines are OK
     _binary="inspect"
     _cloud="claim list remove name flash compile nyan login logout"
     _config="local particle useSudoForDfu list identify"
@@ -39,6 +39,7 @@ _particle() # This is the bash completion function
     _function="list call"
     _keys="new load save send doctor server address protocol"
     _library="create copy migrate search upload publish add"
+    _project="create"
     _serial="list monitor identify wifi mac inspect flash claim"
     _subscribe="mine"
     _token="list revoke new"
@@ -85,6 +86,8 @@ _particle() # This is the bash completion function
         COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
       library)
         COMPREPLY=($(compgen -W "$_library" -- "$cur"));;
+      project)
+        COMPREPLY=($(compgen -W "$_project" -- "$cur"));;
       serial)
         COMPREPLY=($(compgen -W "$_serial" -- "$cur"));;
       subscribe)
