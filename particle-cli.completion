@@ -21,7 +21,7 @@ _particle() # This is the bash completion function
 {
     # Variables defined with local are kept within the function
     local cur prev _primary _binary _cloud _config _device _flash _function \
-    _keys _library _serial _subscribe _token _udp _variable _webhook _wireless
+    _keys _library _project _serial _subscribe _token _udp _variable _webhook _wireless
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
