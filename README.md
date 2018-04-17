@@ -10,7 +10,7 @@
 ## Load the completion:
 
 ```bash
-$ source particle-cli.completion
+$ source particle-cli
 ```
 
 **Now try tabbing while using `particle`!**
