@@ -9,6 +9,6 @@ before_install:
     - sudo pip install bashate
     
 script:
-  - shellcheck -e SC2034 particle-cli
+  - shellcheck -e SC2034,SC2076  particle-cli 
   - shellcheck install
   - ./install
