@@ -6,7 +6,7 @@
 # @nrobinson2000                        #
 # ------------------------------------- #
 
-# Generated at: Wed Jan 20 16:00:12 2021
+# Generated at: Wed Jan 20 16:01:15 2021
 
 # Find serial devices on Mac and Linux
 _get_modems()
@@ -233,7 +233,7 @@ _particle()
         return 0
     fi
 
-	# Suggest files and directories if there is not a match
+    # Suggest files and directories if there is not a match
     COMPREPLY=($(compgen -fd -- "$cur"))
 }
 

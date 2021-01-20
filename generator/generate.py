@@ -218,7 +218,7 @@ indirect_completion('${first}_${second}_${third}')
 indirect_completion('${first}_${second}')
 indirect_completion('${first}')
 
-print('''	# Suggest files and directories if there is not a match
+print('''    # Suggest files and directories if there is not a match
     COMPREPLY=($(compgen -fd -- "$cur"))
 }
 
