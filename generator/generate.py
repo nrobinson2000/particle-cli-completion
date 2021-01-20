@@ -87,7 +87,7 @@ print(
 # Generated at: %s
 
 # Find serial devices on Mac and Linux
-getModems()
+_get_modems()
 {
   if [[ "$(uname -s)" == "Darwin" ]]; then
     ls /dev/cu.usbmodem* 2>/dev/null
@@ -153,9 +153,9 @@ print('''
         return 0
     fi
 
-	# Use getModems (not always perfect, but handy most of the time)
+	# Use _get_modems (not always perfect, but handy most of the time)
     if [[ "$prev" == "__port" ]]; then
-        COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
+        COMPREPLY=($(compgen -W "$(_get_modems)" -- "$cur"))
         return 0
     fi
 
