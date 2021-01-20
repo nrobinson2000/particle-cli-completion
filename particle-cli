@@ -4,11 +4,9 @@
 # particle-cli-completion               #
 # Made by Nathan Robinson               #
 # @nrobinson2000                        #
-# File: particle-cli                    #
-# Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
-# Generated at: Wed Jan 20 15:29:29 2021
+# Generated at: Wed Jan 20 15:44:37 2021
 
 # Find serial devices on Mac and Linux
 _get_modems()
@@ -20,7 +18,8 @@ _get_modems()
   fi
 }
 
-_particle() # This is the bash completion function
+# Bash completion function for particle-cli
+_particle()
 {
 	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 

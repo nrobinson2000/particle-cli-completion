@@ -37,13 +37,9 @@ for command in commands:
                     second_dict[sub_key] = value
 
 # Some keys in seconds_dict have dashes. Bash does not accept this.
-# Replace the dash with and underscore. A workaround will be needed soon.
-
-# TODO: Replace - with _ for prev, prevprev, prevprevprev
-
+# Replace the dash with an underscore.
 bad_keys = "_usb_start-listening _usb_stop-listening _usb_safe-mode _usb_setup-done _usb_cloud-status"
 bad_keys = bad_keys.split()
-
 replace_keys = [key.replace('-', '_') for key in bad_keys]
 replace_dict = second_dict.copy()
 
@@ -80,8 +76,6 @@ print(
 # particle-cli-completion               #
 # Made by Nathan Robinson               #
 # @nrobinson2000                        #
-# File: particle-cli                    #
-# Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
 # Generated at: %s
@@ -96,7 +90,8 @@ _get_modems()
   fi
 }
 
-_particle() # This is the bash completion function
+# Bash completion function for particle-cli
+_particle()
 {
 	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 
@@ -121,7 +116,7 @@ _particle() # This is the bash completion function
 ''' % time.ctime()
 )
 
-# Remove update-cli since its empty and invalid varibale name
+# Remove update-cli since its empty and invalid variable name
 top_level.remove("update-cli")
 
 print("\tlocal %s" % " ".join(["_%s" % key for key in top_level]))
@@ -203,11 +198,8 @@ def indirect_completion(pattern):
     print('\t_lookup="${_lookup//\//_}"')
     print('\t_lookup="${_lookup//./_}"')
     print('\t_options="${!_lookup}"')
-    # print('\tif [[ -n "$_options" ]]; then')
-    # print('\tif [[ -n "$_options" ]] && [[ ! " ${COMP_WORDS[@]} " =~ " ${_options} " ]]; then')
 
     print('\tif [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then')
-
 
     print('\t\tCOMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))')
     print('\t\treturn 0')
