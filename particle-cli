@@ -8,7 +8,7 @@
 # Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
-# Generated at: Tue Jan 19 21:31:26 2021
+# Generated at: Wed Jan 20 11:28:38 2021
 
 # Find serial devices on Mac and Linux
 getModems()
@@ -22,7 +22,7 @@ getModems()
 
 _particle() # This is the bash completion function
 {
-	local cur prev prevprev prevprevprev
+	local cur prev prevprev prevprevprev first second third
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
@@ -34,6 +34,10 @@ _particle() # This is the bash completion function
 	prev="${prev//-/_}"
 	prevprev="${prevprev//-/_}"
 	prevprevprev="${prevprevprev//-/_}"
+
+    first="${COMP_WORDS[1]//-/_}"
+	second="${COMP_WORDS[2]//-/_}"
+	third="${COMP_WORDS[3]//-/_}"
 
 	local _binary _call _cloud _compile _config _device _doctor _flash _function _get _identify _keys _library _list _login _logout _mesh _monitor _nyan _preprocess _product _project _publish _serial _setup _subscribe _token _udp _update _usb _variable _webhook _whoami
 
@@ -128,39 +132,101 @@ _particle() # This is the bash completion function
         return 0
     fi
 
-	# Use getModems
-    if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
-        COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
-        return 0
-    fi
-
-    if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "__follow" ]]; then
+	# Use getModems (not always perfect, but handy most of the time)
+    if [[ "$prev" == "__port" ]]; then
         COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
         return 0
     fi
 
-    # Suggest corresponding subcommands and arguments for each command
+    # Suggest files
+    if [[ "$prev" == "__file" ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+        return 0
+    fi
+
+    # More file overrides
+    if [[ ! "$first" == "$cur" ]] && [[ "flash compile" == *"$first"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+    if [[ "$first" == "cloud" ]] && [[ ! "$second" == "$cur" ]] && [[ "flash compile" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+    if [[ "$first" == "binary" ]] && [[ ! "$second" == "$cur" ]] && [[ "inspect" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+    if [[ "$first" == "keys" ]] && [[ ! "$second" == "$cur" ]] && [[ "new load save send server" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+    if [[ "$first" == "library" ]] && [[ ! "$second" == "$cur" ]] && [[ "migrate" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+    if [[ "$first" == "webhook" ]] && [[ ! "$second" == "$cur" ]] && [[ "create" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi
+
+	# Command matching using indirection
 	local _lookup _options
-	_lookup="_${prev}"
+	_lookup="_${prevprevprev}_${prevprev}_${prev}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
 	if [[ -n "$_options" ]]; then
-		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
 
 	local _lookup _options
 	_lookup="_${prevprev}_${prev}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
 	if [[ -n "$_options" ]]; then
-		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
 
 	local _lookup _options
-	_lookup="_${prevprevprev}_${prevprev}_${prev}"
+	_lookup="_${prev}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
 	if [[ -n "$_options" ]]; then
-		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	local _lookup _options
+	_lookup="_${first}_${second}_${third}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	local _lookup _options
+	_lookup="_${first}_${second}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	local _lookup _options
+	_lookup="_${first}"
+	_lookup="${_lookup//\//_}"
+	_lookup="${_lookup//./_}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
 

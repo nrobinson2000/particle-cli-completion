@@ -7,26 +7,6 @@ options_complete = dict()
 with open("json/options_complete.json") as file:
     options_complete = json.load(file)
 
-def suggest(args):
-    if isinstance(args, str):
-        args = args.split()
-
-    suggestions = list()
-    length = len(args)
-
-    try:
-        selection = options_complete
-        for i in range(length):
-            selection = selection[args[i]]
-        suggestions.extend(selection.keys())
-    except KeyError:
-        pass
-    except AttributeError:
-        pass
-    print(*suggestions, sep=" ")
-
-# suggest(sys.argv[1:])
-
 top_level = list(options_complete.keys())
 commands = options_complete
 
@@ -118,7 +98,7 @@ getModems()
 
 _particle() # This is the bash completion function
 {
-	local cur prev prevprev prevprevprev
+	local cur prev prevprev prevprevprev first second third
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
@@ -130,6 +110,10 @@ _particle() # This is the bash completion function
 	prev="${prev//-/_}"
 	prevprev="${prevprev//-/_}"
 	prevprevprev="${prevprevprev//-/_}"
+
+    first="${COMP_WORDS[1]//-/_}"
+	second="${COMP_WORDS[2]//-/_}"
+	third="${COMP_WORDS[3]//-/_}"
 ''' % time.ctime()
 )
 
@@ -148,7 +132,6 @@ print()
 for key in first_dict:
     print('\t%s="%s"' % (key, first_dict[key]))
 print()
-
 
 print("\tlocal %s" % " ".join(second_dict.keys()))
 print()
@@ -170,38 +153,60 @@ print('''
         return 0
     fi
 
-	# Use getModems
-    if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
-        COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
-        return 0
-    fi
-
-    if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "__follow" ]]; then
+	# Use getModems (not always perfect, but handy most of the time)
+    if [[ "$prev" == "__port" ]]; then
         COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
         return 0
     fi
 
-    # Suggest corresponding subcommands and arguments for each command''')
+    # Suggest files
+    if [[ "$prev" == "__file" ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+        return 0
+    fi
+
+    # More file overrides
+    if [[ ! "$first" == "$cur" ]] && [[ "flash compile" == *"$first"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi''')
+
+def file_override_completion(first_arg, pattern_list):
+    pattern = " ".join(pattern_list)
+    print('''
+    if [[ "$first" == "%s" ]] && [[ ! "$second" == "$cur" ]] && [[ "%s" == *"$second"* ]]; then
+        COMPREPLY=($(compgen -fd -- "$cur"))
+    fi''' % (first_arg, pattern))
+
+file_override_completion("cloud", ["flash", "compile"])
+file_override_completion("binary", ["inspect"])
+file_override_completion("keys", ["new", "load", "save", "send", "server"])
+file_override_completion("library", ["migrate"])
+file_override_completion("webhook", ["create"])
+print()
 
 def indirect_completion(pattern):
     print('\tlocal _lookup _options')
     print('\t_lookup="_%s"' % pattern)
+    print('\t_lookup="${_lookup//\//_}"')
+    print('\t_lookup="${_lookup//./_}"')
     print('\t_options="${!_lookup}"')
     print('\tif [[ -n "$_options" ]]; then')
-    print('\t\tCOMPREPLY=($(compgen -W "$_options" -- "$cur"))')
+    print('\t\tCOMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))')
     print('\t\treturn 0')
     print('\tfi')
     print()
 
-# First level matching (indirection)
+print("\t# Command matching using indirection")
+
+# Relative matching (indirection)
+indirect_completion('${prevprevprev}_${prevprev}_${prev}')
+indirect_completion('${prevprev}_${prev}')
 indirect_completion('${prev}')
 
-# Second level matching (indirection)
-indirect_completion('${prevprev}_${prev}')
-
-# Third level matching (indirection)
-indirect_completion('${prevprevprev}_${prevprev}_${prev}')
-
+# Absolute matching (indirection)
+indirect_completion('${first}_${second}_${third}')
+indirect_completion('${first}_${second}')
+indirect_completion('${first}')
 
 print('''	# Suggest files and directories if there is not a match
 	COMPREPLY=($(compgen -fd -- "$cur"))
