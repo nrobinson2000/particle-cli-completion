@@ -8,7 +8,7 @@
 # Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
-# Generated at: Wed Jan 20 11:28:38 2021
+# Generated at: Wed Jan 20 11:39:31 2021
 
 # Find serial devices on Mac and Linux
 getModems()
@@ -145,7 +145,7 @@ _particle() # This is the bash completion function
     fi
 
     # More file overrides
-    if [[ ! "$first" == "$cur" ]] && [[ "flash compile" == *"$first"* ]]; then
+    if [[ ! "$first" == "$cur" ]] && [[ "flash compile preprocess" == *"$first"* ]]; then
         COMPREPLY=($(compgen -fd -- "$cur"))
     fi
 

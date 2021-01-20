@@ -165,10 +165,15 @@ print('''
         return 0
     fi
 
-    # More file overrides
-    if [[ ! "$first" == "$cur" ]] && [[ "flash compile" == *"$first"* ]]; then
+    # More file overrides''')
+
+def file_completion(pattern_list):
+    pattern = " ".join(pattern_list)
+    print('''    if [[ ! "$first" == "$cur" ]] && [[ "%s" == *"$first"* ]]; then
         COMPREPLY=($(compgen -fd -- "$cur"))
-    fi''')
+    fi''' % pattern)
+
+file_completion(["flash", "compile", "preprocess"])
 
 def file_override_completion(first_arg, pattern_list):
     pattern = " ".join(pattern_list)
