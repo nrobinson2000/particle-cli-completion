@@ -93,26 +93,26 @@ _get_modems()
 # Bash completion function for particle-cli
 _particle()
 {
-	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
+    local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
 
-	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
-	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
-	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+    prev="${COMP_WORDS[COMP_CWORD-1]}"         # Previous word typed
+    prevprev="${COMP_WORDS[COMP_CWORD-2]}"     # Previous previous word typed
+    prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
 
     prevraw="${prev}"
     prevprevraw="${prevprev}"
     prevprevnonflag="${prevprev/-/_}"
 
-	prev="${prev//-/_}"
-	prevprev="${prevprev//-/_}"
-	prevprevprev="${prevprevprev//-/_}"
+    prev="${prev//-/_}"
+    prevprev="${prevprev//-/_}"
+    prevprevprev="${prevprevprev//-/_}"
 
     first="${COMP_WORDS[1]//-/_}"
-	second="${COMP_WORDS[2]//-/_}"
-	third="${COMP_WORDS[3]//-/_}"
+    second="${COMP_WORDS[2]//-/_}"
+    third="${COMP_WORDS[3]//-/_}"
 ''' % time.ctime()
 )
 
@@ -156,7 +156,7 @@ print('''
         return 0
     fi
 
-	# Use _get_modems (not always perfect, but handy most of the time)
+    # Use _get_modems (not always perfect, but handy most of the time)
     if [[ "$prev" == "__port" ]] && [[ ! "$first" == "keys" ]]; then
         COMPREPLY=($(compgen -W "$(_get_modems)" -- "$cur"))
         return 0
@@ -219,7 +219,7 @@ indirect_completion('${first}_${second}')
 indirect_completion('${first}')
 
 print('''	# Suggest files and directories if there is not a match
-	COMPREPLY=($(compgen -fd -- "$cur"))
+    COMPREPLY=($(compgen -fd -- "$cur"))
 }
 
 complete -F _particle particle # Apply the _particle completion function

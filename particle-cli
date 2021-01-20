@@ -6,7 +6,7 @@
 # @nrobinson2000                        #
 # ------------------------------------- #
 
-# Generated at: Wed Jan 20 15:44:37 2021
+# Generated at: Wed Jan 20 15:58:44 2021
 
 # Find serial devices on Mac and Linux
 _get_modems()
@@ -21,26 +21,26 @@ _get_modems()
 # Bash completion function for particle-cli
 _particle()
 {
-	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
+    local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
 
-	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
-	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
-	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+    prev="${COMP_WORDS[COMP_CWORD-1]}"         # Previous word typed
+    prevprev="${COMP_WORDS[COMP_CWORD-2]}"     # Previous previous word typed
+    prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
 
     prevraw="${prev}"
     prevprevraw="${prevprev}"
     prevprevnonflag="${prevprev/-/_}"
 
-	prev="${prev//-/_}"
-	prevprev="${prevprev//-/_}"
-	prevprevprev="${prevprevprev//-/_}"
+    prev="${prev//-/_}"
+    prevprev="${prevprev//-/_}"
+    prevprevprev="${prevprevprev//-/_}"
 
     first="${COMP_WORDS[1]//-/_}"
-	second="${COMP_WORDS[2]//-/_}"
-	third="${COMP_WORDS[3]//-/_}"
+    second="${COMP_WORDS[2]//-/_}"
+    third="${COMP_WORDS[3]//-/_}"
 
 	local _binary _call _cloud _compile _config _device _doctor _flash _function _get _identify _keys _library _list _login _logout _mesh _monitor _nyan _preprocess _product _project _publish _serial _setup _subscribe _token _udp _update _usb _variable _webhook _whoami
 
@@ -135,7 +135,7 @@ _particle()
         return 0
     fi
 
-	# Use _get_modems (not always perfect, but handy most of the time)
+    # Use _get_modems (not always perfect, but handy most of the time)
     if [[ "$prev" == "__port" ]] && [[ ! "$first" == "keys" ]]; then
         COMPREPLY=($(compgen -W "$(_get_modems)" -- "$cur"))
         return 0
@@ -234,7 +234,7 @@ _particle()
 	fi
 
 	# Suggest files and directories if there is not a match
-	COMPREPLY=($(compgen -fd -- "$cur"))
+    COMPREPLY=($(compgen -fd -- "$cur"))
 }
 
 complete -F _particle particle # Apply the _particle completion function
