@@ -1,0 +1,307 @@
+{
+    "binary": {
+        "inspect": {}
+    },
+    "call": {
+        "--product": "Target a device within the given Product ID or Slug  [string]"
+    },
+    "cloud": {
+        "list": {},
+        "claim": {},
+        "remove": {
+            "--yes": "Answer yes to all questions  [boolean]"
+        },
+        "name": {},
+        "flash": {
+            "--target": "The firmware version to compile against. Defaults to latest version, or version on device for cellular.  [string]",
+            "--followSymlinks": "Follow symlinks when collecting files  [boolean]",
+            "--product": "Target a device within the given Product ID or Slug  [string]"
+        },
+        "compile": {
+            "--target": "The firmware version to compile against. Defaults to latest version, or version on device for cellular.  [string]",
+            "--followSymlinks": "Follow symlinks when collecting files  [boolean]",
+            "--saveTo": "Filename for the compiled binary  [string]"
+        },
+        "nyan": {
+            "--product": "Target a device within the given Product ID or Slug  [string]"
+        },
+        "login": {
+            "-u": "--username  your username  [string]",
+            "-p": "--password  your password  [string]",
+            "-t": "--token     an existing Particle access token to use  [string]",
+            "--otp": "the login code if two-step authentication is enabled  [string]"
+        },
+        "logout": {}
+    },
+    "compile": {
+        "--target": "The firmware version to compile against. Defaults to latest version, or version on device for cellular.  [string]",
+        "--followSymlinks": "Follow symlinks when collecting files  [boolean]",
+        "--saveTo": "Filename for the compiled binary  [string]"
+    },
+    "config": {
+        "--list": "Display available configurations  [boolean]"
+    },
+    "device": {
+        "add": {},
+        "remove": {
+            "--yes": "Answer yes to all questions  [boolean]"
+        },
+        "rename": {},
+        "doctor": {}
+    },
+    "doctor": {},
+    "flash": {
+        "--cloud": "Flash over the air to the device. Default if no other flag provided  [boolean]",
+        "--usb": "Flash over USB using the DFU utility  [boolean]",
+        "--serial": "Flash over a virtual serial port  [boolean]",
+        "--factory": "Flash user application to the factory reset location. Only available for DFU  [boolean]",
+        "--force": "Flash even when binary does not pass pre-flash checks  [boolean]",
+        "--yes": "Answer yes to all questions  [boolean]",
+        "--target": "The firmware version to compile against. Defaults to latest version, or version on device for cellular.  [string]",
+        "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device. Only available for serial  [string]"
+    },
+    "function": {
+        "list": {},
+        "call": {
+            "--product": "Target a device within the given Product ID or Slug  [string]"
+        }
+    },
+    "get": {
+        "--time": "Show the time when the variable was received  [boolean]",
+        "--product": "Target a device within the given Product ID or Slug  [string]"
+    },
+    "identify": {
+        "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+    },
+    "keys": {
+        "new": {
+            "--protocol": "Communication protocol for the device using the key. tcp or udp  [string]"
+        },
+        "load": {},
+        "save": {
+            "--force": "Force overwriting of <filename> if it exists  [boolean] [default: false]"
+        },
+        "send": {
+            "--product_id": "The product ID to use when provisioning a new device  [number]"
+        },
+        "doctor": {
+            "--protocol": "Communication protocol for the device using the key. tcp or udp  [string]"
+        },
+        "server": {
+            "--protocol": "Communication protocol for the device using the key. tcp or udp  [string]",
+            "--host": "Hostname or IP address of the server to add to the key  [string]",
+            "--port": "Port number of the server to add to the key  [number]",
+            "--deviceType": "Generate key file for the provided device type  [string]"
+        },
+        "address": {
+            "--protocol": "Communication protocol for the device using the key. tcp or udp  [string]"
+        },
+        "protocol": {
+            "--protocol": "Communication protocol for the device using the key. tcp or udp  [string]"
+        }
+    },
+    "library": {
+        "add": {},
+        "create": {
+            "--name": "The name of the library to create.  [string]",
+            "--version": "The initial version of the library to create.  [string]",
+            "--author": "The author of the library.  [string]"
+        },
+        "copy": {},
+        "list": {
+            "--filter": "filters libraries not matching the text  [string]",
+            "--non-interactive": "Prints a single page of libraries without prompting  [boolean]",
+            "--page": "Start the listing at the given page number  [number]",
+            "--limit": "The number of items to show per page  [number]",
+            "--json": "output JSON formatted data [experimental]  [boolean]"
+        },
+        "migrate": {
+            "--test": "--dryrun  test if the library can be migrated  [boolean]",
+            "--adapter": "add include file adapters to support v1-style includes \"library/library.h\"  [boolean] [default: true]"
+        },
+        "search": {
+            "--json": "output JSON formatted data [experimental]  [boolean]"
+        },
+        "upload": {
+            "--dryRun": "perform validation steps but don't actually upload the library.  [boolean]"
+        },
+        "publish": {},
+        "view": {
+            "--readme": "display the readme for the library  [boolean]",
+            "--source": "display the main source file for the library  [boolean]",
+            "--header": "display the main header file for the library  [boolean]",
+            "--json": "output JSON formatted data [experimental]  [boolean]"
+        }
+    },
+    "list": {},
+    "login": {
+        "-u": "--username  your username  [string]",
+        "-p": "--password  your password  [string]",
+        "-t": "--token     an existing Particle access token to use  [string]",
+        "--otp": "the login code if two-step authentication is enabled  [string]"
+    },
+    "logout": {},
+    "mesh": {
+        "create": {
+            "--password": "Network password. The minimum password length is 6 characters  [string]",
+            "--channel": "Network channel. By default, the device will try to pick the least congested channel in your environment  [number]",
+            "--yes": "-y   Answer yes to all questions  [boolean]"
+        },
+        "add": {
+            "--password": "Network password  [string]",
+            "--yes": "-y   Answer yes to all questions  [boolean]"
+        },
+        "remove": {
+            "--yes": "-y  Answer yes to all questions  [boolean]"
+        },
+        "list": {
+            "--networks-only": "-n  Do not list member devices  [boolean]"
+        },
+        "info": {},
+        "scan": {}
+    },
+    "monitor": {
+        "--time": "Show the time when the variable was received  [boolean]",
+        "--delay": "Interval in milliseconds between variable fetches  [number]"
+    },
+    "nyan": {
+        "--product": "Target a device within the given Product ID or Slug  [string]"
+    },
+    "preprocess": {
+        "--name": "Filename and path to include in the preprocessed file. Default to the input file name  [string]",
+        "--saveTo": "Filename for the preprocessed file  [string]"
+    },
+    "product": {
+        "device": {
+            "list": {
+                "--name": "-n    Filter to devices with this name (partial matching)  [string]",
+                "--page": "-p    Start listing at the given page number  [number]",
+                "--limit": "-l   The number of items to show per page  [number]",
+                "--groups": "-g  Space separated list of groups to include  [array]",
+                "--json": "Output JSON formatted data (experimental)  [boolean]"
+            },
+            "add": {
+                "--file": "-f  Path to single column .txt file with list of IDs, S/Ns, IMEIs, or ICCIDs of the devices to add  [string]"
+            },
+            "remove": {}
+        }
+    },
+    "project": {
+        "create": {
+            "--name": "provide a name for the project  [string]"
+        }
+    },
+    "publish": {
+        "--private": "Publish to the private stream  [boolean] [default: true]",
+        "--public": "Publish to the public stream  [boolean]",
+        "--product": "Publish to the given Product ID or Slug's stream  [string]"
+    },
+    "serial": {
+        "list": {},
+        "monitor": {
+            "--follow": "Reopen the port after it closes, for example when the device resets  [boolean]",
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "identify": {
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "wifi": {
+            "--file": "Take the credentials from a JSON file instead of prompting for them  [string]",
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "mac": {
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "inspect": {
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "flash": {
+            "--yes": "Answer yes to all questions  [boolean]",
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        },
+        "claim": {
+            "--port": "Use this serial port instead of auto-detecting. Useful if there are more than 1 connected device  [string]"
+        }
+    },
+    "setup": {
+        "--wifi": "Force setup over WiFi even if a device is connected to USB  [boolean]",
+        "--scan": "Force WiFi scanning  [boolean]",
+        "--manual": "Force no WiFi scannign  [boolean]",
+        "--yes": "Answer yes to all questions  [boolean]"
+    },
+    "subscribe": {
+        "--all": "Listen to all events instead of just those from my devices  [boolean]",
+        "--device": "Listen to events from this device only  [string]",
+        "--until": "Listen until we see an event exactly matching this data  [string]",
+        "--max": "Listen until we see this many events  [number]",
+        "--product": "Target a device within the given Product ID or Slug  [string]"
+    },
+    "token": {
+        "list": {},
+        "revoke": {
+            "--force": "Force deleting access token used by this CLI  [boolean]"
+        },
+        "create": {
+            "--expires-in": "Create a token valid for this many seconds. When omitted, the Particle API assigns a default expiration.  [number]",
+            "--never-expires": "Create a token that doesn't expire. Useful for a token that will be used by a cloud application for making Particle API requests.  [boolean]"
+        }
+    },
+    "udp": {
+        "send": {},
+        "listen": {}
+    },
+    "update": {},
+    "update-cli": {},
+    "usb": {
+        "list": {
+            "--exclude-dfu": "Do not list devices which are in DFU mode  [boolean]",
+            "--ids-only": "Print only device IDs  [boolean]"
+        },
+        "start-listening": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "listen": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "stop-listening": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "safe-mode": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "dfu": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "reset": {
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "setup-done": {
+            "--reset": "Clear the setup done flag  [boolean]",
+            "--all": "Send the command to all devices connected to the host computer  [boolean]"
+        },
+        "configure": {},
+        "cloud-status": {
+            "--until": "Poll your device for a specific connection state and then exit  [string] [choices: \"unknown\", \"disconnected\", \"connecting\", \"connected\", \"disconnecting\"]",
+            "--timeout": "How long should polling wait (in ms) for the requested status?  [number] [default: 60000]"
+        }
+    },
+    "variable": {
+        "list": {},
+        "get": {
+            "--time": "Show the time when the variable was received  [boolean]",
+            "--product": "Target a device within the given Product ID or Slug  [string]"
+        },
+        "monitor": {
+            "--time": "Show the time when the variable was received  [boolean]",
+            "--delay": "Interval in milliseconds between variable fetches  [number]"
+        }
+    },
+    "webhook": {
+        "create": {},
+        "list": {},
+        "delete": {},
+        "POST": {},
+        "GET": {}
+    },
+    "whoami": {}
+}

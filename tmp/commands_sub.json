@@ -1,0 +1,127 @@
+{
+    "binary": {
+        "inspect": {}
+    },
+    "call": {},
+    "cloud": {
+        "list": {},
+        "claim": {},
+        "remove": {},
+        "name": {},
+        "flash": {},
+        "compile": {},
+        "nyan": {},
+        "login": {},
+        "logout": {}
+    },
+    "compile": {},
+    "config": {},
+    "device": {
+        "add": {},
+        "remove": {},
+        "rename": {},
+        "doctor": {}
+    },
+    "doctor": {},
+    "flash": {},
+    "function": {
+        "list": {},
+        "call": {}
+    },
+    "get": {},
+    "identify": {},
+    "keys": {
+        "new": {},
+        "load": {},
+        "save": {},
+        "send": {},
+        "doctor": {},
+        "server": {},
+        "address": {},
+        "protocol": {}
+    },
+    "library": {
+        "add": {},
+        "create": {},
+        "copy": {},
+        "list": {},
+        "migrate": {},
+        "search": {},
+        "upload": {},
+        "publish": {},
+        "view": {}
+    },
+    "list": {},
+    "login": {},
+    "logout": {},
+    "mesh": {
+        "create": {},
+        "add": {},
+        "remove": {},
+        "list": {},
+        "info": {},
+        "scan": {}
+    },
+    "monitor": {},
+    "nyan": {},
+    "preprocess": {},
+    "product": {
+        "device": {
+            "list": "List all devices that are part of a product",
+            "add": "Adds one or more devices into a Product",
+            "remove": "Removes a device from a Product"
+        }
+    },
+    "project": {
+        "create": {}
+    },
+    "publish": {},
+    "serial": {
+        "list": {},
+        "monitor": {},
+        "identify": {},
+        "wifi": {},
+        "mac": {},
+        "inspect": {},
+        "flash": {},
+        "claim": {}
+    },
+    "setup": {},
+    "subscribe": {},
+    "token": {
+        "list": {},
+        "revoke": {},
+        "create": {}
+    },
+    "udp": {
+        "send": {},
+        "listen": {}
+    },
+    "update": {},
+    "update-cli": {},
+    "usb": {
+        "list": {},
+        "start-listening": {},
+        "listen": {},
+        "stop-listening": {},
+        "safe-mode": {},
+        "dfu": {},
+        "reset": {},
+        "setup-done": {},
+        "configure": {},
+        "cloud-status": {}
+    },
+    "variable": {
+        "list": {},
+        "get": {},
+        "monitor": {}
+    },
+    "webhook": {
+        "create": {},
+        "list": {},
+        "delete": {},
+        "POST": {},
+        "GET": {}
+    },
+    "whoami": {}
+}

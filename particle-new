@@ -1,0 +1,165 @@
+#!/bin/bash
+
+# ------------------------------------- #
+# particle-cli-completion               #
+# Made by Nathan Robinson               #
+# @nrobinson2000                        #
+# File: particle-cli-completion         #
+# Desc: Tab completion for particle-cli #
+# ------------------------------------- #
+
+getModems()
+{
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    ls /dev/cu.usbmodem* 2>/dev/null
+  else
+    ls /dev/ttyACM* 2>/dev/null
+  fi
+}
+
+_particle() # This is the bash completion function
+{
+    # Variables defined with local are kept within the function
+    local cur prev _primary _binary _cloud _config _device _flash _function \
+    _keys _library _project _serial _subscribe _token _udp _variable _webhook _wireless
+
+    COMPREPLY=()                       # Completion suggestions array
+    cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
+    
+	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
+	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
+	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+
+    # These strings contain subcommands and arguments
+	_primary="binary call cloud compile config device doctor flash function get identify keys library list login logout mesh monitor nyan preprocess product project publish serial setup subscribe token udp update update-cli usb variable webhook whoami"
+	_binary="inspect"
+	_call=""
+	_cloud="list claim remove name flash compile nyan login logout"
+	_compile=""
+	_config=""
+	_device="add remove rename doctor"
+	_doctor=""
+	_flash=""
+	_function="list call"
+	_get=""
+	_identify=""
+	_keys="new load save send doctor server address protocol"
+	_library="add create copy list migrate search upload publish view"
+	_list=""
+	_login=""
+	_logout=""
+	_mesh="create add remove list info scan"
+	_monitor=""
+	_nyan=""
+	_preprocess=""
+	_product="device"
+	_project="create"
+	_publish=""
+	_serial="list monitor identify wifi mac inspect flash claim"
+	_setup=""
+	_subscribe=""
+	_token="list revoke create"
+	_udp="send listen"
+	_update=""
+	# _update-cli=""
+	_usb="list start-listening listen stop-listening safe-mode dfu reset setup-done configure cloud-status"
+	_variable="list get monitor"
+	_webhook="create list delete POST GET"
+	_whoami=""
+
+    # Suggest primary subcommands when typing the first word after 'particle'
+    if [[ "$COMP_CWORD" == 1 ]]; then
+      COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+      return 0
+    fi
+
+    if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
+      return 0
+    fi
+
+    if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "--follow" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
+      return 0
+    fi
+
+    # Suggest corresponding subcommands and arguments for each command
+
+	case "$prev" in
+		binary)
+			COMPREPLY=($(compgen -W "$_binary" -- "$cur"));;
+		call)
+			COMPREPLY=($(compgen -W "$_call" -- "$cur"));;
+		cloud)
+			COMPREPLY=($(compgen -W "$_cloud" -- "$cur"));;
+		compile)
+			COMPREPLY=($(compgen -W "$_compile" -- "$cur"));;
+		config)
+			COMPREPLY=($(compgen -W "$_config" -- "$cur"));;
+		device)
+			COMPREPLY=($(compgen -W "$_device" -- "$cur"));;
+		doctor)
+			COMPREPLY=($(compgen -W "$_doctor" -- "$cur"));;
+		flash)
+			COMPREPLY=($(compgen -W "$_flash" -- "$cur"));;
+		function)
+			COMPREPLY=($(compgen -W "$_function" -- "$cur"));;
+		get)
+			COMPREPLY=($(compgen -W "$_get" -- "$cur"));;
+		identify)
+			COMPREPLY=($(compgen -W "$_identify" -- "$cur"));;
+		keys)
+			COMPREPLY=($(compgen -W "$_keys" -- "$cur"));;
+		library)
+			COMPREPLY=($(compgen -W "$_library" -- "$cur"));;
+		list)
+			COMPREPLY=($(compgen -W "$_list" -- "$cur"));;
+		login)
+			COMPREPLY=($(compgen -W "$_login" -- "$cur"));;
+		logout)
+			COMPREPLY=($(compgen -W "$_logout" -- "$cur"));;
+		mesh)
+			COMPREPLY=($(compgen -W "$_mesh" -- "$cur"));;
+		monitor)
+			COMPREPLY=($(compgen -W "$_monitor" -- "$cur"));;
+		nyan)
+			COMPREPLY=($(compgen -W "$_nyan" -- "$cur"));;
+		preprocess)
+			COMPREPLY=($(compgen -W "$_preprocess" -- "$cur"));;
+		product)
+			COMPREPLY=($(compgen -W "$_product" -- "$cur"));;
+		project)
+			COMPREPLY=($(compgen -W "$_project" -- "$cur"));;
+		publish)
+			COMPREPLY=($(compgen -W "$_publish" -- "$cur"));;
+		serial)
+			COMPREPLY=($(compgen -W "$_serial" -- "$cur"));;
+		setup)
+			COMPREPLY=($(compgen -W "$_setup" -- "$cur"));;
+		subscribe)
+			COMPREPLY=($(compgen -W "$_subscribe" -- "$cur"));;
+		token)
+			COMPREPLY=($(compgen -W "$_token" -- "$cur"));;
+		udp)
+			COMPREPLY=($(compgen -W "$_udp" -- "$cur"));;
+		update)
+			COMPREPLY=($(compgen -W "$_update" -- "$cur"));;
+		# update-cli)
+		# 	COMPREPLY=($(compgen -W "$_update-cli" -- "$cur"));;
+		usb)
+			COMPREPLY=($(compgen -W "$_usb" -- "$cur"));;
+		variable)
+			COMPREPLY=($(compgen -W "$_variable" -- "$cur"));;
+		webhook)
+			COMPREPLY=($(compgen -W "$_webhook" -- "$cur"));;
+		whoami)
+			COMPREPLY=($(compgen -W "$_whoami" -- "$cur"));;
+		*)
+			# Suggest files and directories if there is not a match
+			COMPREPLY=($(compgen -fd -- "$cur"));;
+		esac
+}
+
+complete -F _particle particle # Apply the _particle completion function
+complete -F _particle p
+alias p="particle"

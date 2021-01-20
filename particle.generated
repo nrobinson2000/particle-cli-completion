@@ -1,0 +1,182 @@
+#!/bin/bash
+
+# ------------------------------------- #
+# particle-cli-completion               #
+# Made by Nathan Robinson               #
+# @nrobinson2000                        #
+# File: particle-cli-completion         #
+# Desc: Tab completion for particle-cli #
+# ------------------------------------- #
+
+getModems()
+{
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    ls /dev/cu.usbmodem* 2>/dev/null
+  else
+    ls /dev/ttyACM* 2>/dev/null
+  fi
+}
+
+_particle() # This is the bash completion function
+{
+	local cur prev prevprev prevprevprev first
+
+    COMPREPLY=()                       # Completion suggestions array
+    cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
+	first="${COMP_WORDS[1]}"           # First word typed
+
+	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
+	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
+	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+
+	prev="${prev//-/_}"
+	prevprev="${prevprev//-/_}"
+	prevprevprev="${prevprevprev//-/_}"
+
+	local _binary _call _cloud _compile _config _device _doctor _flash _function \
+		_get _identify _keys _library _list _login _logout _mesh _monitor _nyan _preprocess \
+		_product _project _publish _serial _setup _subscribe _token _udp _update \
+		_usb _variable _webhook _whoami
+
+	_primary="binary call cloud compile config device doctor flash function get identify keys library list login logout mesh monitor nyan preprocess product project publish serial setup subscribe token udp update update-cli usb variable webhook whoami help --version"
+
+	_binary="inspect"
+	_call="--product"
+	_cloud="list claim remove name flash compile nyan login logout"
+	_compile="--target --followSymlinks --saveTo"
+	_config="--list"
+	_device="add remove rename doctor"
+	_flash="--cloud --usb --serial --factory --force --yes --target --port"
+	_function="list call"
+	_get="--time --product"
+	_identify="--port"
+	_keys="new load save send doctor server address protocol"
+	_library="add create copy list migrate search upload publish view"
+	_login="-u -p -t --otp"
+	_mesh="create add remove list info scan"
+	_monitor="--time --delay"
+	_nyan="--product"
+	_preprocess="--name --saveTo"
+	_product="device"
+	_project="create"
+	_publish="--private --public --product"
+	_serial="list monitor identify wifi mac inspect flash claim"
+	_setup="--wifi --scan --manual --yes"
+	_subscribe="--all --device --until --max --product"
+	_token="list revoke create"
+	_udp="send listen"
+	_usb="list start-listening listen stop-listening safe-mode dfu reset setup-done configure cloud-status"
+	_variable="list get monitor"
+	_webhook="create list delete POST GET"
+
+	local _cloud_remove _cloud_flash _cloud_compile _cloud_nyan _cloud_login _device_remove \
+		_function_call _keys_new _keys_save _keys_send _keys_doctor _keys_server _keys_address \
+		_keys_protocol _library_create _library_list _library_migrate _library_search \
+		_library_upload _library_view _mesh_create _mesh_add _mesh_remove _mesh_list _product_device \
+		_project_create _serial_monitor _serial_identify _serial_wifi _serial_mac _serial_inspect \
+		_serial_flash _serial_claim _token_revoke _token_create _usb_list _usb_listen _usb_dfu \
+		_usb_reset _variable_get _variable_monitor _usb_start_listening _usb_stop_listening \
+		_usb_safe_mode _usb_setup_done _usb_cloud_status
+
+	_cloud_remove="--yes"
+	_cloud_flash="--target --followSymlinks --product"
+	_cloud_compile="--target --followSymlinks --saveTo"
+	_cloud_nyan="--product"
+	_cloud_login="-u -p -t --otp"
+	_device_remove="--yes"
+	_function_call="--product"
+	_keys_new="--protocol"
+	_keys_save="--force"
+	_keys_send="--product_id"
+	_keys_doctor="--protocol"
+	_keys_server="--protocol --host --port --deviceType"
+	_keys_address="--protocol"
+	_keys_protocol="--protocol"
+	_library_create="--name --version --author"
+	_library_list="--filter --non-interactive --page --limit --json"
+	_library_migrate="--test --adapter"
+	_library_search="--json"
+	_library_upload="--dryRun"
+	_library_view="--readme --source --header --json"
+	_mesh_create="--password --channel --yes"
+	_mesh_add="--password --yes"
+	_mesh_remove="--yes"
+	_mesh_list="--networks-only"
+	_product_device="list add remove"
+	_project_create="--name"
+	_serial_monitor="--follow --port"
+	_serial_identify="--port"
+	_serial_wifi="--file --port"
+	_serial_mac="--port"
+	_serial_inspect="--port"
+	_serial_flash="--yes --port"
+	_serial_claim="--port"
+	_token_revoke="--force"
+	_token_create="--expires-in --never-expires"
+	_usb_list="--exclude-dfu --ids-only"
+	_usb_listen="--all"
+	_usb_dfu="--all"
+	_usb_reset="--all"
+	_variable_get="--time --product"
+	_variable_monitor="--time --delay"
+	_usb_start_listening="--all"
+	_usb_stop_listening="--all"
+	_usb_safe_mode="--all"
+	_usb_setup_done="--reset --all"
+	_usb_cloud_status="--until --timeout"
+
+	local _product_device_list _product_device_add
+
+	_product_device_list="--name --page --limit --groups --json"
+	_product_device_add="--file"
+
+    # Suggest primary subcommands when typing the first word after 'particle'
+    if [[ "$COMP_CWORD" == 1 ]] || [[ "$prev" == "help" ]]; then
+      COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+      return 0
+    fi
+
+	# Use getModems
+    if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
+      return 0
+    fi
+
+    if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "--follow" ]]; then
+      COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
+      return 0
+    fi
+
+    # Suggest corresponding subcommands and arguments for each command
+
+	local _lookup _options
+	_lookup="_${prev}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	local _lookup _options
+	_lookup="_${prevprev}_${prev}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	local _lookup _options
+	_lookup="_${prevprevprev}_${prevprev}_${prev}"
+	_options="${!_lookup}"
+	if [[ -n "$_options" ]]; then
+		COMPREPLY=($(compgen -W "$_options" -- "$cur"))
+		return 0
+	fi
+
+	# Suggest files and directories if there is not a match
+	COMPREPLY=($(compgen -fd -- "$cur"))
+}
+
+complete -F _particle particle # Apply the _particle completion function
+complete -F _particle p
+alias p="particle"
