@@ -98,7 +98,7 @@ _get_modems()
 
 _particle() # This is the bash completion function
 {
-	local cur prev prevprev prevprevprev first second third
+	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
@@ -106,6 +106,10 @@ _particle() # This is the bash completion function
 	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
 	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
 	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+
+    prevraw="${prev}"
+    prevprevraw="${prevprev}"
+    prevprevnonflag="${prevprev/-/_}"
 
 	prev="${prev//-/_}"
 	prevprev="${prevprev//-/_}"
@@ -129,6 +133,10 @@ top_level.extend(['update-cli', 'help', '--version'])
 print('\t_primary="%s"' % " ".join(top_level))
 print()
 
+# Override, use long flags for `login` and `cloud login`
+first_dict['_login'] = "--username --password --token --otp"
+second_dict['_cloud_login'] = "--username --password --token --otp"
+
 for key in first_dict:
     print('\t%s="%s"' % (key, first_dict[key]))
 print()
@@ -147,14 +155,14 @@ for key in third_dict:
     print('\t%s="%s"' % (key, third_dict[key]))
 
 print('''
-    # Suggest primary subcommands when typing the first word after 'particle'
+    # Suggest primary subcommands after `particle` or `particle help`
     if [[ "$COMP_CWORD" == 1 ]] || [[ "$prev" == "help" ]]; then
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
         return 0
     fi
 
 	# Use _get_modems (not always perfect, but handy most of the time)
-    if [[ "$prev" == "__port" ]]; then
+    if [[ "$prev" == "__port" ]] && [[ ! "$first" == "keys" ]]; then
         COMPREPLY=($(compgen -W "$(_get_modems)" -- "$cur"))
         return 0
     fi
@@ -195,7 +203,12 @@ def indirect_completion(pattern):
     print('\t_lookup="${_lookup//\//_}"')
     print('\t_lookup="${_lookup//./_}"')
     print('\t_options="${!_lookup}"')
-    print('\tif [[ -n "$_options" ]]; then')
+    # print('\tif [[ -n "$_options" ]]; then')
+    # print('\tif [[ -n "$_options" ]] && [[ ! " ${COMP_WORDS[@]} " =~ " ${_options} " ]]; then')
+
+    print('\tif [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then')
+
+
     print('\t\tCOMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))')
     print('\t\treturn 0')
     print('\tfi')

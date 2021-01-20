@@ -8,7 +8,7 @@
 # Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
-# Generated at: Wed Jan 20 11:44:15 2021
+# Generated at: Wed Jan 20 15:29:29 2021
 
 # Find serial devices on Mac and Linux
 _get_modems()
@@ -22,7 +22,7 @@ _get_modems()
 
 _particle() # This is the bash completion function
 {
-	local cur prev prevprev prevprevprev first second third
+	local cur prev prevprev prevprevprev first second third prevraw prevprevraw prevprevnonflag
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
@@ -30,6 +30,10 @@ _particle() # This is the bash completion function
 	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
 	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
 	prevprevprev="${COMP_WORDS[COMP_CWORD-3]}" # Previous previous previous word typed
+
+    prevraw="${prev}"
+    prevprevraw="${prevprev}"
+    prevprevnonflag="${prevprev/-/_}"
 
 	prev="${prev//-/_}"
 	prevprev="${prevprev//-/_}"
@@ -55,7 +59,7 @@ _particle() # This is the bash completion function
 	_identify="--port"
 	_keys="new load save send doctor server address protocol"
 	_library="add create copy list migrate search upload publish view"
-	_login="-u -p -t --otp"
+	_login="--username --password --token --otp"
 	_mesh="create add remove list info scan"
 	_monitor="--time --delay"
 	_nyan="--product"
@@ -78,7 +82,7 @@ _particle() # This is the bash completion function
 	_cloud_flash="--target --followSymlinks --product"
 	_cloud_compile="--target --followSymlinks --saveTo"
 	_cloud_nyan="--product"
-	_cloud_login="-u -p -t --otp"
+	_cloud_login="--username --password --token --otp"
 	_device_remove="--yes"
 	_function_call="--product"
 	_keys_new="--protocol"
@@ -126,14 +130,14 @@ _particle() # This is the bash completion function
 	_product_device_list="--name --page --limit --groups --json"
 	_product_device_add="--file"
 
-    # Suggest primary subcommands when typing the first word after 'particle'
+    # Suggest primary subcommands after `particle` or `particle help`
     if [[ "$COMP_CWORD" == 1 ]] || [[ "$prev" == "help" ]]; then
         COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
         return 0
     fi
 
 	# Use _get_modems (not always perfect, but handy most of the time)
-    if [[ "$prev" == "__port" ]]; then
+    if [[ "$prev" == "__port" ]] && [[ ! "$first" == "keys" ]]; then
         COMPREPLY=($(compgen -W "$(_get_modems)" -- "$cur"))
         return 0
     fi
@@ -175,7 +179,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
@@ -185,7 +189,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
@@ -195,7 +199,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
@@ -205,7 +209,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
@@ -215,7 +219,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
@@ -225,7 +229,7 @@ _particle() # This is the bash completion function
 	_lookup="${_lookup//\//_}"
 	_lookup="${_lookup//./_}"
 	_options="${!_lookup}"
-	if [[ -n "$_options" ]]; then
+	if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then
 		COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))
 		return 0
 	fi
