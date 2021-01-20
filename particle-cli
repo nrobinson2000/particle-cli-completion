@@ -4,10 +4,13 @@
 # particle-cli-completion               #
 # Made by Nathan Robinson               #
 # @nrobinson2000                        #
-# File: particle-cli-completion         #
+# File: particle-cli                    #
 # Desc: Tab completion for particle-cli #
 # ------------------------------------- #
 
+# Generated at: Tue Jan 19 21:31:26 2021
+
+# Find serial devices on Mac and Linux
 getModems()
 {
   if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -19,11 +22,10 @@ getModems()
 
 _particle() # This is the bash completion function
 {
-	local cur prev prevprev prevprevprev first
+	local cur prev prevprev prevprevprev
 
     COMPREPLY=()                       # Completion suggestions array
     cur="${COMP_WORDS[COMP_CWORD]}"    # Current word being typed
-	first="${COMP_WORDS[1]}"           # First word typed
 
 	prev="${COMP_WORDS[COMP_CWORD-1]}" # Previous word typed
 	prevprev="${COMP_WORDS[COMP_CWORD-2]}" # Previous previous word typed
@@ -33,12 +35,9 @@ _particle() # This is the bash completion function
 	prevprev="${prevprev//-/_}"
 	prevprevprev="${prevprevprev//-/_}"
 
-	local _binary _call _cloud _compile _config _device _doctor _flash _function \
-		_get _identify _keys _library _list _login _logout _mesh _monitor _nyan _preprocess \
-		_product _project _publish _serial _setup _subscribe _token _udp _update \
-		_usb _variable _webhook _whoami
+	local _binary _call _cloud _compile _config _device _doctor _flash _function _get _identify _keys _library _list _login _logout _mesh _monitor _nyan _preprocess _product _project _publish _serial _setup _subscribe _token _udp _update _usb _variable _webhook _whoami
 
-	_primary="binary call cloud compile config device doctor flash function get identify keys library list login logout mesh monitor nyan preprocess product project publish serial setup subscribe token udp update update-cli usb variable webhook whoami help --version"
+	_primary="binary call cloud compile config device doctor flash function get identify keys library list login logout mesh monitor nyan preprocess product project publish serial setup subscribe token udp update usb variable webhook whoami update-cli help --version"
 
 	_binary="inspect"
 	_call="--product"
@@ -69,14 +68,7 @@ _particle() # This is the bash completion function
 	_variable="list get monitor"
 	_webhook="create list delete POST GET"
 
-	local _cloud_remove _cloud_flash _cloud_compile _cloud_nyan _cloud_login _device_remove \
-		_function_call _keys_new _keys_save _keys_send _keys_doctor _keys_server _keys_address \
-		_keys_protocol _library_create _library_list _library_migrate _library_search \
-		_library_upload _library_view _mesh_create _mesh_add _mesh_remove _mesh_list _product_device \
-		_project_create _serial_monitor _serial_identify _serial_wifi _serial_mac _serial_inspect \
-		_serial_flash _serial_claim _token_revoke _token_create _usb_list _usb_listen _usb_dfu \
-		_usb_reset _variable_get _variable_monitor _usb_start_listening _usb_stop_listening \
-		_usb_safe_mode _usb_setup_done _usb_cloud_status
+	local _cloud_remove _cloud_flash _cloud_compile _cloud_nyan _cloud_login _device_remove _function_call _keys_new _keys_save _keys_send _keys_doctor _keys_server _keys_address _keys_protocol _library_create _library_list _library_migrate _library_search _library_upload _library_view _mesh_create _mesh_add _mesh_remove _mesh_list _product_device _project_create _serial_monitor _serial_identify _serial_wifi _serial_mac _serial_inspect _serial_flash _serial_claim _token_revoke _token_create _usb_list _usb_listen _usb_dfu _usb_reset _variable_get _variable_monitor _usb_start_listening _usb_stop_listening _usb_safe_mode _usb_setup_done _usb_cloud_status
 
 	_cloud_remove="--yes"
 	_cloud_flash="--target --followSymlinks --product"
@@ -132,23 +124,22 @@ _particle() # This is the bash completion function
 
     # Suggest primary subcommands when typing the first word after 'particle'
     if [[ "$COMP_CWORD" == 1 ]] || [[ "$prev" == "help" ]]; then
-      COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
-      return 0
+        COMPREPLY=($(compgen -W "$_primary" -- "$cur"))
+        return 0
     fi
 
 	# Use getModems
     if [[ "$COMP_CWORD" == 3 ]] && [[ "$prev" == "monitor" ]]; then
-      COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
-      return 0
+        COMPREPLY=($(compgen -W "$(getModems) --follow" -- "$cur"))
+        return 0
     fi
 
     if [[ "$COMP_CWORD" == 4 ]] && [[ "$prev" == "__follow" ]]; then
-      COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
-      return 0
+        COMPREPLY=($(compgen -W "$(getModems)" -- "$cur"))
+        return 0
     fi
 
     # Suggest corresponding subcommands and arguments for each command
-
 	local _lookup _options
 	_lookup="_${prev}"
 	_options="${!_lookup}"

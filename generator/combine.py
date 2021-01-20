@@ -8,16 +8,16 @@ options = dict()
 options_sub = dict()
 options_sub_sub = dict()
 
-with open("commands_sub_sub.json") as file:
+with open("json/commands_sub_sub.json") as file:
     commands = json.load(file)
 
-with open("options.json") as file:
+with open("json/options.json") as file:
     options = json.load(file)
 
-with open("options_sub.json") as file:
+with open("json/options_sub.json") as file:
     options_sub = json.load(file)
 
-with open("options_sub_sub.json") as file:
+with open("json/options_sub_sub.json") as file:
     options_sub_sub = json.load(file)
 
 # Create options_complete.json
@@ -32,7 +32,5 @@ for command in options:
                 options_complete[command][sub_command] = options_sub_sub[command][sub_command]
 
 
-with open("options_complete.json", "w") as file:
+with open("json/options_complete.json", "w") as file:
     json.dump(options_complete, file, indent=4)
-
-# Creat options_optimized.json

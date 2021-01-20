@@ -16,10 +16,6 @@ def get_options(input):
 	left_slice = input[input.index('Options:')+1:]
 	right_slice = left_slice[:left_slice.index('')]
 	command_dict = {line.split(maxsplit=1)[0].split(",")[0]:line.split(maxsplit=1)[1] for line in right_slice}
-
-	# command_dict = [line.split(maxsplit=1)[0].split(",")[0] for line in right_slice]
-
-
 	return command_dict
 
 # Initial top level of commands
@@ -61,26 +57,15 @@ for command in command_map:
 	except ValueError:
 		options[command] = {}
 
-
-# Generate more BASH completion code
-
-# print(*['_%s="%s"' % (key, " ".join(commands[key])) for key in commands], sep="\n")
-
-# print('case "$prev" in')
-# for command in top_level:
-# 	print("\t%s)" % command)
-# 	print('\t\tCOMPREPLY=($(compgen -W "$_%s" -- "$cur"));;' % command)
-
-# Write help.json
-with open("help.json", "w") as file:
+with open("json/help.json", "w") as file:
 	json.dump(help_output, file, indent=4)
 
 # Write JSON files
-with open("commands.json", "w") as file:
+with open("json/commands.json", "w") as file:
 	json.dump(commands, file, indent=4)
-with open("description.json", "w") as file:
+with open("json/description.json", "w") as file:
 	json.dump(description, file, indent=4)
-with open("options.json", "w") as file:
+with open("json/options.json", "w") as file:
 	json.dump(options, file, indent=4)
 
 
@@ -127,15 +112,15 @@ for command in commands:
 			options_sub[command][sub_command] = {}
 
 # Write massive JSON file
-with open("help_sub.json", "w") as file:
+with open("json/help_sub.json", "w") as file:
 	json.dump(help_sub, file, indent=4)
 
 # Write cool JSON files
-with open("commands_sub.json", "w") as file:
+with open("json/commands_sub.json", "w") as file:
 	json.dump(commands_sub, file, indent=4)
-with open("description_sub.json", "w") as file:
+with open("json/description_sub.json", "w") as file:
 	json.dump(description_sub, file, indent=4)
-with open("options_sub.json", "w") as file:
+with open("json/options_sub.json", "w") as file:
 	json.dump(options_sub, file, indent=4)
 
 
@@ -196,13 +181,13 @@ for command in commands_sub:
 				options_sub_sub[command][sub_command][sub_sub_command] = {}
 
 # Write cool JSON files
-with open("commands_sub_sub.json", "w") as file:
+with open("json/commands_sub_sub.json", "w") as file:
 	json.dump(commands_sub_sub, file, indent=4)
-with open("description_sub_sub.json", "w") as file:
+with open("json/description_sub_sub.json", "w") as file:
 	json.dump(description_sub_sub, file, indent=4)
-with open("options_sub_sub.json", "w") as file:
+with open("json/options_sub_sub.json", "w") as file:
 	json.dump(options_sub_sub, file, indent=4)
 
 # Write massive JSON file
-with open("help_sub_sub.json", "w") as file:
+with open("json/help_sub_sub.json", "w") as file:
 	json.dump(help_sub_sub, file, indent=4)
