@@ -119,13 +119,13 @@ _particle()
 # Remove update-cli since its empty and invalid variable name
 top_level.remove("update-cli")
 
-print("\tlocal %s" % " ".join(["_%s" % key for key in top_level]))
+print("    local %s" % " ".join(["_%s" % key for key in top_level]))
 print()
 
 # Add update-cli back, and add help and --version
 top_level.extend(['update-cli', 'help', '--version'])
 
-print('\t_primary="%s"' % " ".join(top_level))
+print('    _primary="%s"' % " ".join(top_level))
 print()
 
 # Override, use long flags for `login` and `cloud login`
@@ -133,21 +133,21 @@ first_dict['_login'] = "--username --password --token --otp"
 second_dict['_cloud_login'] = "--username --password --token --otp"
 
 for key in first_dict:
-    print('\t%s="%s"' % (key, first_dict[key]))
+    print('    %s="%s"' % (key, first_dict[key]))
 print()
 
-print("\tlocal %s" % " ".join(second_dict.keys()))
+print("    local %s" % " ".join(second_dict.keys()))
 print()
 
 for key in second_dict:
-    print('\t%s="%s"' % (key, second_dict[key]))
+    print('    %s="%s"' % (key, second_dict[key]))
 print()
 
-print("\tlocal %s" % " ".join(third_dict.keys()))
+print("    local %s" % " ".join(third_dict.keys()))
 print()
 
 for key in third_dict:
-    print('\t%s="%s"' % (key, third_dict[key]))
+    print('    %s="%s"' % (key, third_dict[key]))
 
 print('''
     # Suggest primary subcommands after `particle` or `particle help`
@@ -193,20 +193,20 @@ file_override_completion("webhook", ["create"])
 print()
 
 def indirect_completion(pattern):
-    print('\tlocal _lookup _options')
-    print('\t_lookup="_%s"' % pattern)
-    print('\t_lookup="${_lookup//\//_}"')
-    print('\t_lookup="${_lookup//./_}"')
-    print('\t_options="${!_lookup}"')
+    print('    local _lookup _options')
+    print('    _lookup="_%s"' % pattern)
+    print('    _lookup="${_lookup//\//_}"')
+    print('    _lookup="${_lookup//./_}"')
+    print('    _options="${!_lookup}"')
 
-    print('\tif [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then')
+    print('    if [[ -n "$_options" ]] && [[ ! " ${_options} " =~ " ${prev} " ]] && [[ ! "${_options}" == "${prevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprev} " ]] && [[ ! "${_options}" == "${prevprevraw}" ]] && [[ ! " ${_options} " =~ " ${prevprevnonflag} " ]]; then')
 
-    print('\t\tCOMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))')
-    print('\t\treturn 0')
-    print('\tfi')
+    print('        COMPREPLY=(${COMPREPLY[@]} $(compgen -W "$_options" -- "$cur"))')
+    print('        return 0')
+    print('    fi')
     print()
 
-print("\t# Command matching using indirection")
+print("    # Command matching using indirection")
 
 # Relative matching (indirection)
 indirect_completion('${prevprevprev}_${prevprev}_${prev}')
