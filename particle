@@ -1,5 +1,6 @@
+# shellcheck shell=bash disable=SC2034,SC2076
 # particle completion
-# Generated at: Sat Feb 20 14:17:42 2021
+# Generated at: Sat Feb 20 15:05:32 2021
 
 # Find serial devices on Mac and Linux
 _get_modems()

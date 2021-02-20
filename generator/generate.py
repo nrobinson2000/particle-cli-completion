@@ -70,7 +70,8 @@ for command in commands:
 # Generate some BASH completion code
 
 print(
-'''# particle completion
+'''# shellcheck shell=bash disable=SC2034,SC2076
+# particle completion
 # Generated at: %s
 
 # Find serial devices on Mac and Linux
