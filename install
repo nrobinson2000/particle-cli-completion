@@ -8,18 +8,18 @@
 # Desc: Install particle-cli-completion #
 # ------------------------------------- #
 
-COMPLETION_URL="https://raw.githubusercontent.com/nrobinson2000/particle-cli-completion/master/particle-cli"
+COMPLETION_URL="https://raw.githubusercontent.com/nrobinson2000/particle-cli-completion/master/particle"
 
 echo
 
 case "$(uname -s)" in
   Linux)
-    sudo curl -sLo "/etc/bash_completion.d/particle-cli" "$COMPLETION_URL"
-    echo "Installed in /etc/bash_completion.d";;
+    sudo curl -sLo "/usr/share/bash-completion/completions/particle" "$COMPLETION_URL"
+    echo "Installed in /usr/share/bash-completion/completions";;
   *)
     mkdir -p "$HOME/.bash_completion"
-    curl -sLo "$HOME/.bash_completion/particle-cli" "$COMPLETION_URL"
-    echo "source $HOME/.bash_completion/particle-cli" >> "$HOME/.profile"
+    curl -sLo "$HOME/.bash_completion/particle" "$COMPLETION_URL"
+    echo "source $HOME/.bash_completion/particle" >> "$HOME/.profile"
     echo "Installed in ~/.bash_completion, sourced in ~/.profile";;
 esac
 

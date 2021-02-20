@@ -10,7 +10,7 @@
 ## Load the completion:
 
 ```bash
-$ source particle-cli
+$ source particle
 ```
 
 **Now try tabbing while using `particle`!**
@@ -23,11 +23,11 @@ You can install the completion using the [install script](https://github.com/nro
 $ bash <(curl -sL https://git.io/vQWZD)
 ```
 
-## Regenerating particle-cli completion automatically
+## Regenerating particle completion automatically
 
 ```bash
 $ cd generator
 $ python3 completion.py
 $ python3 combine.py
-$ python3 generate.py > ../particle-cli
+$ python3 generate.py > ../particle
 ```

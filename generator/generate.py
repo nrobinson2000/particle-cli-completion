@@ -70,14 +70,7 @@ for command in commands:
 # Generate some BASH completion code
 
 print(
-'''#!/bin/bash
-
-# ------------------------------------- #
-# particle-cli-completion               #
-# Made by Nathan Robinson               #
-# @nrobinson2000                        #
-# ------------------------------------- #
-
+'''# particle completion
 # Generated at: %s
 
 # Find serial devices on Mac and Linux
@@ -220,8 +213,5 @@ indirect_completion('${first}')
 
 print('''    # Suggest files and directories if there is not a match
     COMPREPLY=($(compgen -fd -- "$cur"))
-}
-
-complete -F _particle particle # Apply the _particle completion function
-complete -F _particle p
-alias p="particle"''')
+} &&
+complete -F _particle particle''')
